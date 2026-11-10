@@ -1,0 +1,20 @@
+# Default profile for scripts/collect_vla.sh (recorded scripted demos in the
+# per-seed pickle layout). Merged over config/default.yml, so the renderer is
+# the default NYX setup (spp/denoise/env map from default.yml); pass
+# `-- --renderer rasterizer` to collect_vla.sh for a CPU-friendly run.
+show_viewer: false
+robot_config: null
+
+camera_config:
+  default:
+    w: 640
+    h: 480
+    fovy: 60
+  D435:
+    w: 640
+    h: 480
+    fovy: 60
+
+record_cameras: [head_camera, right_wrist]
+
+renderer: nyx

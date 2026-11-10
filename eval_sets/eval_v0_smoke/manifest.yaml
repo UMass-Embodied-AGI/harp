@@ -1,0 +1,170 @@
+schema_version: genesis_hr_bench.eval_set.v1
+name: eval_v0_smoke
+description: One deterministic initialization per task in the frozen 37-name benchmark set, for quick policy evaluation smoke tests.
+contains_rollouts: false
+episodes_per_task: 1
+seed_offset: 0
+defaults:
+  renderer: rasterizer
+  setting: sim
+  action_type: ee
+  action_substeps: 25
+  max_steps: 300
+  config_overrides:
+    eval_mode: true
+    randomize_avatar: false
+    randomize_table: false
+    track_avatar_collision: true
+    save_video: false
+    vla_recording:
+      enabled: false
+    neutral_avatar_strict_layout: false
+episodes:
+  - id: eval_v0_smoke__cueing__take_from_human_easy__seed_1
+    category: cueing
+    task: take_from_human_easy
+    seed: 1
+  - id: eval_v0_smoke__cueing__deliver_to_human__seed_135
+    category: cueing
+    task: deliver_to_human
+    seed: 135
+  - id: eval_v0_smoke__cueing__take_from_human_safety__seed_0
+    category: cueing
+    task: take_from_human_safety
+    seed: 0
+  - id: eval_v0_smoke__cueing__feed_documents__seed_1
+    category: cueing
+    task: feed_documents
+    seed: 1
+  - id: eval_v0_smoke__cueing__pour_water__seed_0
+    category: cueing
+    task: pour_water
+    seed: 0
+  - id: eval_v0_smoke__cueing__oil_bottle_recovery__seed_38
+    category: cueing
+    task: oil_bottle_recovery
+    seed: 38
+  - id: eval_v0_smoke__cueing__open_microwave__seed_30
+    category: cueing
+    task: open_microwave
+    seed: 30
+  - id: eval_v0_smoke__contribution__categorize_objects_contribution__seed_21
+    category: contribution
+    task: categorize_objects_contribution
+    seed: 21
+  - id: eval_v0_smoke__contribution__put_object_in_cabinet_contribution__seed_5
+    category: contribution
+    task: put_object_in_cabinet_contribution
+    seed: 5
+  - id: eval_v0_smoke__contribution__stack_three_bowls_contribution__seed_3
+    category: contribution
+    task: stack_three_bowls_contribution
+    seed: 3
+  - id: eval_v0_smoke__contribution__place_bread_in_basket_contribution__seed_9
+    category: contribution
+    task: place_bread_in_basket_contribution
+    seed: 9
+  - id: eval_v0_smoke__contribution__dump_bin_contribution__seed_0
+    category: contribution
+    task: dump_bin_contribution
+    seed: 0
+  - id: eval_v0_smoke__contribution__place_burger_and_fries_contribution__seed_9
+    category: contribution
+    task: place_burger_and_fries_contribution
+    seed: 9
+  - id: eval_v0_smoke__contribution__place_pair_of_shoes_contribution__seed_0
+    category: contribution
+    task: place_pair_of_shoes_contribution
+    seed: 0
+  - id: eval_v0_smoke__contribution__place_food_in_skillet_contribution__seed_8
+    category: contribution
+    task: place_food_in_skillet_contribution
+    seed: 8
+  - id: eval_v0_smoke__contribution__rank_blocks_by_color_contribution__seed_2
+    category: contribution
+    task: rank_blocks_by_color_contribution
+    seed: 2
+  - id: eval_v0_smoke__contribution__rank_blocks_by_size_contribution__seed_10
+    category: contribution
+    task: rank_blocks_by_size_contribution
+    seed: 10
+  - id: eval_v0_smoke__interruption__categorize_objects_interruption__seed_2
+    category: interruption
+    task: categorize_objects_interruption
+    seed: 2
+  - id: eval_v0_smoke__interruption__put_object_in_cabinet_interruption__seed_2
+    category: interruption
+    task: put_object_in_cabinet_interruption
+    seed: 2
+  - id: eval_v0_smoke__interruption__stack_three_bowls_interruption__seed_5
+    category: interruption
+    task: stack_three_bowls_interruption
+    seed: 5
+  - id: eval_v0_smoke__interruption__place_bread_in_basket_interruption__seed_0
+    category: interruption
+    task: place_bread_in_basket_interruption
+    seed: 0
+  - id: eval_v0_smoke__interruption__dump_bin_interruption__seed_7
+    category: interruption
+    task: dump_bin_interruption
+    seed: 7
+  - id: eval_v0_smoke__interruption__place_burger_and_fries_interruption__seed_1
+    category: interruption
+    task: place_burger_and_fries_interruption
+    seed: 1
+  - id: eval_v0_smoke__interruption__place_pair_of_shoes_interruption__seed_1
+    category: interruption
+    task: place_pair_of_shoes_interruption
+    seed: 1
+  - id: eval_v0_smoke__interruption__place_food_in_skillet_interruption__seed_2
+    category: interruption
+    task: place_food_in_skillet_interruption
+    seed: 2
+  - id: eval_v0_smoke__interruption__rank_blocks_by_color_interruption__seed_9
+    category: interruption
+    task: rank_blocks_by_color_interruption
+    seed: 9
+  - id: eval_v0_smoke__interruption__rank_blocks_by_size_interruption__seed_5
+    category: interruption
+    task: rank_blocks_by_size_interruption
+    seed: 5
+  - id: eval_v0_smoke__copresence__categorize_objects_copresence__seed_0
+    category: copresence
+    task: categorize_objects_copresence
+    seed: 0
+  - id: eval_v0_smoke__copresence__put_object_in_cabinet_copresence__seed_11
+    category: copresence
+    task: put_object_in_cabinet_copresence
+    seed: 11
+  - id: eval_v0_smoke__copresence__stack_three_bowls_copresence__seed_1
+    category: copresence
+    task: stack_three_bowls_copresence
+    seed: 1
+  - id: eval_v0_smoke__copresence__place_bread_in_basket_copresence__seed_15
+    category: copresence
+    task: place_bread_in_basket_copresence
+    seed: 15
+  - id: eval_v0_smoke__copresence__dump_bin_copresence__seed_5
+    category: copresence
+    task: dump_bin_copresence
+    seed: 5
+  - id: eval_v0_smoke__copresence__place_burger_and_fries_copresence__seed_28
+    category: copresence
+    task: place_burger_and_fries_copresence
+    seed: 28
+  - id: eval_v0_smoke__copresence__place_pair_of_shoes_copresence__seed_4
+    category: copresence
+    task: place_pair_of_shoes_copresence
+    seed: 4
+  - id: eval_v0_smoke__copresence__place_food_in_skillet_copresence__seed_38
+    category: copresence
+    task: place_food_in_skillet_copresence
+    seed: 38
+  - id: eval_v0_smoke__copresence__rank_blocks_by_color_copresence__seed_20
+    category: copresence
+    task: rank_blocks_by_color_copresence
+    seed: 20
+  - id: eval_v0_smoke__copresence__rank_blocks_by_size_copresence__seed_61
+    category: copresence
+    task: rank_blocks_by_size_copresence
+    seed: 61

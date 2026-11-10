@@ -1,0 +1,10 @@
+# Genesis HR Bench - release runtime plus data/visualization helpers.
+# Keep the simulator, planner, renderer, and core numeric versions centralized.
+-r requirements-genesis-latest.txt
+
+# Additional task and offline-data helpers.  These versions are frozen from
+# the benchmark environments used for the release validation.
+scipy==1.15.3
+pyyaml==6.0.3
+imageio==2.37.3
+imageio-ffmpeg==0.6.0

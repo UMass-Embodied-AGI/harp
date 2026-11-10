@@ -1,0 +1,3 @@
+[submodule "baseline/lerobot"]
+	path = baseline/lerobot
+	url = https://github.com/huggingface/lerobot

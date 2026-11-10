@@ -1,0 +1,53 @@
+vla:
+  # Always replaced by eval_vla.py --model (act, lerobot_diffusion, pi0, pi05,
+  # smolvla); the default matches run_vla_eval.sh --model pi0.
+  model_name: "pi0"
+  checkpoint_path: null
+
+  task_instruction: null
+
+  image_size: [224, 224]
+  cameras:
+    - head_camera
+  include_wrist_cameras: false
+
+  include_proprio: true
+  proprio_source: "joint_state"
+
+  action_type: "ee"
+  dual_arm: false
+  action_chunk_size: 1
+  action_norm_stats: null
+
+  device: "cuda"
+  dtype: "bfloat16"
+
+  primary_camera: "head_camera"
+  dual_arm_strategy: "unsupported"
+
+  # Normalization-stats key for servers that need one (eval_vla.py --unnorm-key).
+  unnorm_key: null
+
+  # Second image stream (the released ACT, LeRobot-Diffusion, pi0, pi0.5 and
+  # SmolVLA baselines all train with a wrist camera). The client only ships
+  # this image if its policy class declares a non-None `IMG_WRIST`; a
+  # primary-only client declares IMG_WRIST=None and the wrist image is
+  # dropped client-side.
+  wrist_camera: right_wrist
+
+  # Dual-arm two_pass: the left arm is run against this camera's image.
+  secondary_camera: null
+
+  # HTTP bridge to the model server. scripts/run_vla_eval.sh spawns the
+  # matching baseline/servers/<model>_server.py and passes --server-url to
+  # eval_vla.py, so you rarely set this by hand. Ignored by `template`.
+  # Default ports: pi0=8767 pi05=8768 act=8775 lerobot_diffusion=8777
+  # smolvla=8778.
+  server_url: "http://127.0.0.1:8767"
+  server_timeout: 60
+
+  # pi0 / pi0.5 are finetuned + served via lerobot v0.5.2 (policy types pi0 /
+  # pi05 through baseline/servers/lerobot_server.py).
+  # The current qpos_target_abs checkpoints emit 8-D absolute qpos actions, so
+  # run_vla_eval.sh defaults pi0/pi05 to --action-type qpos_abs. If you train
+  # an EE-delta checkpoint, override with --action-type ee.

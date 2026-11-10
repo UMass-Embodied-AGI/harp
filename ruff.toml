@@ -1,0 +1,16 @@
+# Lint gate: pyflakes correctness classes only (undefined names, unused
+# imports, syntax errors).  Style/formatting is deliberately NOT enforced —
+# a whole-repo reformat would churn files under active task tuning.
+# Run:  bash scripts/check_quality.sh (includes owned servers, not vendors)
+target-version = "py310"
+line-length = 100
+
+[lint]
+select = ["F", "E9"]
+# Unused locals: many are deliberate discard-unpacks in task scripts; clean
+# opportunistically rather than gating on them.
+ignore = ["F841"]
+
+[lint.per-file-ignores]
+# __init__ modules re-export their imports as the public surface.
+"**/__init__.py" = ["F401"]

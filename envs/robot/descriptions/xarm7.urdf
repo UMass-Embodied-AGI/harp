@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+<!--
+  Planner-only xArm7 description for mplib.
+
+  Kinematics and mesh geometry are derived from UFACTORY's BSD-3-Clause
+  xArm7 description and the matching Menagerie model already required by the
+  simulator.  The simulator continues to load assets/embodiments/xarm7/xarm7.xml;
+  this file only removes the historical example-robot-data dependency from
+  motion-planner startup.
+-->
+<robot name="UF_ROBOT">
+  <link name="world"/>
+
+  <link name="link_base">
+    <collision>
+      <geometry>
+        <mesh filename="../../../assets/embodiments/xarm7/assets/link_base.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="world_joint" type="fixed">
+    <parent link="world"/>
+    <child link="link_base"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <link name="link1">
+    <collision>
+      <geometry>
+        <mesh filename="../../../assets/embodiments/xarm7/assets/link1.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="joint1" type="revolute">
+    <parent link="link_base"/>
+    <child link="link1"/>
+    <origin xyz="0 0 0.267" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-6.283185307179586" upper="6.283185307179586" effort="50" velocity="3.14"/>
+  </joint>
+
+  <link name="link2">
+    <collision>
+      <geometry>
+        <mesh filename="../../../assets/embodiments/xarm7/assets/link2.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="joint2" type="revolute">
+    <parent link="link1"/>
+    <child link="link2"/>
+    <origin xyz="0 0 0" rpy="-1.5708 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-2.059" upper="2.0944" effort="50" velocity="3.14"/>
+  </joint>
+
+  <link name="link3">
+    <collision>
+      <geometry>
+        <mesh filename="../../../assets/embodiments/xarm7/assets/link3.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="joint3" type="revolute">
+    <parent link="link2"/>
+    <child link="link3"/>
+    <origin xyz="0 -0.293 0" rpy="1.5708 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-6.283185307179586" upper="6.283185307179586" effort="30" velocity="3.14"/>
+  </joint>
+
+  <link name="link4">
+    <collision>
+      <geometry>
+        <mesh filename="../../../assets/embodiments/xarm7/assets/link4.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="joint4" type="revolute">
+    <parent link="link3"/>
+    <child link="link4"/>
+    <origin xyz="0.0525 0 0" rpy="1.5708 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-0.19198" upper="3.927" effort="30" velocity="3.14"/>
+  </joint>
+
+  <link name="link5">
+    <collision>
+      <geometry>
+        <mesh filename="../../../assets/embodiments/xarm7/assets/link5.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="joint5" type="revolute">
+    <parent link="link4"/>
+    <child link="link5"/>
+    <origin xyz="0.0775 -0.3425 0" rpy="1.5708 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-6.283185307179586" upper="6.283185307179586" effort="30" velocity="3.14"/>
+  </joint>
+
+  <link name="link6">
+    <collision>
+      <geometry>
+        <mesh filename="../../../assets/embodiments/xarm7/assets/link6.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="joint6" type="revolute">
+    <parent link="link5"/>
+    <child link="link6"/>
+    <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-1.69297" upper="3.141592653589793" effort="20" velocity="3.14"/>
+  </joint>
+
+  <link name="link7">
+    <collision>
+      <geometry>
+        <mesh filename="../../../assets/embodiments/xarm7/assets/end_tool.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="joint7" type="revolute">
+    <parent link="link6"/>
+    <child link="link7"/>
+    <origin xyz="0.076 0.097 0" rpy="-1.5708 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-6.283185307179586" upper="6.283185307179586" effort="20" velocity="3.14"/>
+  </joint>
+
+  <link name="link_eef"/>
+  <joint name="joint_eef" type="fixed">
+    <parent link="link7"/>
+    <child link="link_eef"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+</robot>

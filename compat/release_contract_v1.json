@@ -1,0 +1,1418 @@
+{
+  "contract_schema": "genesis_hr_bench.release_contract.v1",
+  "description": "Frozen public names and serialized interfaces for release-compatible framework changes. Changes to this file require an explicit compatibility decision and migration plan.",
+  "model_registry": {
+    "deployable": {
+      "act": {
+        "action_type": "qpos_abs",
+        "port": 8775,
+        "server_script": "baseline/servers/lerobot_server.py"
+      },
+      "lerobot_diffusion": {
+        "action_type": "ee",
+        "port": 8777,
+        "server_script": "baseline/servers/lerobot_server.py"
+      },
+      "pi0": {
+        "action_type": "qpos_abs",
+        "port": 8767,
+        "server_script": "baseline/servers/lerobot_server.py"
+      },
+      "pi05": {
+        "action_type": "qpos_abs",
+        "port": 8768,
+        "server_script": "baseline/servers/lerobot_server.py"
+      },
+      "smolvla": {
+        "action_type": "ee",
+        "port": 8778,
+        "server_script": "baseline/servers/lerobot_server.py"
+      }
+    },
+    "policies": {
+      "act": "ACTPolicy",
+      "lerobot_diffusion": "LeRobotDiffusionPolicy",
+      "pi0": "Pi0Policy",
+      "pi05": "Pi05Policy",
+      "smolvla": "SmolVLAPolicy",
+      "template": "TemplatePolicy"
+    },
+    "source": "scripts/vla_client.py",
+    "wrapper_source": "scripts/run_vla_eval.sh"
+  },
+  "task_registry": {
+    "accepted_aliases": {
+      "blocks_ranking_rgb_assist": {
+        "class": "RankBlocksByColorContribution",
+        "instruction": "place the red, green, and blue blocks in left-to-right order while the human helps place one block",
+        "module": "envs.tasks.rank_blocks_by_color_contribution"
+      },
+      "blocks_ranking_rgb_interrupt": {
+        "class": "RankBlocksByColorInterruption",
+        "instruction": "place the red, green, and blue blocks in left-to-right order; wait while the human inspects one block, then continue",
+        "module": "envs.tasks.rank_blocks_by_color_interruption"
+      },
+      "blocks_ranking_rgb_neutral": {
+        "class": "RankBlocksByColorCopresence",
+        "instruction": "place the red, green, and blue blocks in left-to-right order while the human works nearby on the same table",
+        "module": "envs.tasks.rank_blocks_by_color_copresence"
+      },
+      "blocks_ranking_size_assist": {
+        "class": "RankBlocksBySizeContribution",
+        "instruction": "place the RGB blocks in largest-to-smallest order while the human helps place one block",
+        "module": "envs.tasks.rank_blocks_by_size_contribution"
+      },
+      "blocks_ranking_size_interrupt": {
+        "class": "RankBlocksBySizeInterruption",
+        "instruction": "place the RGB blocks in largest-to-smallest order; wait while the human inspects one block, then continue",
+        "module": "envs.tasks.rank_blocks_by_size_interruption"
+      },
+      "blocks_ranking_size_neutral": {
+        "class": "RankBlocksBySizeCopresence",
+        "instruction": "place the blocks from largest to smallest while the human works nearby on the same table",
+        "module": "envs.tasks.rank_blocks_by_size_copresence"
+      },
+      "categorize_cooperative": {
+        "class": "CategorizeObjectsContribution",
+        "instruction": "sort the objects into the matching baskets",
+        "module": "envs.tasks.categorize_objects_contribution"
+      },
+      "categorize_interrupt": {
+        "class": "CategorizeObjectsInterruption",
+        "instruction": "sort the objects into the matching baskets",
+        "module": "envs.tasks.categorize_objects_interruption"
+      },
+      "categorize_neutral": {
+        "class": "CategorizeObjectsCopresence",
+        "instruction": "sort the objects into matching baskets while the human works nearby on the same table",
+        "module": "envs.tasks.categorize_objects_copresence"
+      },
+      "deliver_to_human_easy": {
+        "class": "DeliverToHuman",
+        "instruction": "pick up the rubik's cube from the table and deliver it to the human",
+        "instruction_template": "pick up the {object} from the table and deliver it to the human",
+        "module": "envs.tasks.deliver_to_human"
+      },
+      "dump_bin_assist": {
+        "class": "DumpBinContribution",
+        "instruction": "empty the table cubes into the trash bin while the human tosses another cube into the bin",
+        "module": "envs.tasks.dump_bin_contribution"
+      },
+      "dump_bin_interrupt": {
+        "class": "DumpBinInterruption",
+        "instruction": "place each cube into the trash can; the human will inspect one cube midway through - wait, then continue.",
+        "module": "envs.tasks.dump_bin_interruption"
+      },
+      "dump_bin_neutral": {
+        "class": "DumpBinCopresence",
+        "instruction": "put the table objects into the bin while the human works nearby on the same table",
+        "module": "envs.tasks.dump_bin_copresence"
+      },
+      "place_bread_in_basket_assist": {
+        "class": "PlaceBreadInBasketContribution",
+        "instruction": "put one bread into the basket while the human puts the other bread into the basket",
+        "module": "envs.tasks.place_bread_in_basket_contribution"
+      },
+      "place_bread_in_basket_interrupt": {
+        "class": "PlaceBreadInBasketInterruption",
+        "instruction": "put both breads into the basket; if the human inspects one bread midway through, wait and then continue",
+        "module": "envs.tasks.place_bread_in_basket_interruption"
+      },
+      "place_bread_in_basket_neutral": {
+        "class": "PlaceBreadInBasketCopresence",
+        "instruction": "place both pieces of bread in the basket while the human works nearby on the same table",
+        "module": "envs.tasks.place_bread_in_basket_copresence"
+      },
+      "place_burger_fries_assist": {
+        "class": "PlaceBurgerAndFriesContribution",
+        "instruction": "place the hamburger on the tray while the human adds one food item",
+        "module": "envs.tasks.place_burger_and_fries_contribution"
+      },
+      "place_burger_fries_interrupt": {
+        "class": "PlaceBurgerAndFriesInterruption",
+        "instruction": "place the hamburger and the french fries on the tray; if the human inspects one item midway through, wait and then continue",
+        "module": "envs.tasks.place_burger_and_fries_interruption"
+      },
+      "place_burger_fries_neutral": {
+        "class": "PlaceBurgerAndFriesCopresence",
+        "instruction": "place the meal items on the tray while the human works nearby on the same table",
+        "module": "envs.tasks.place_burger_and_fries_copresence"
+      },
+      "place_dual_shoes_assist": {
+        "class": "PlacePairOfShoesContribution",
+        "instruction": "the human will put one shoe in the shoebox; the robot puts the other shoe in the shoebox — work in parallel",
+        "module": "envs.tasks.place_pair_of_shoes_contribution"
+      },
+      "place_dual_shoes_interrupt": {
+        "class": "PlacePairOfShoesInterruption",
+        "instruction": "put the shoes in the shoebox; the human will inspect one shoe midway through - wait, then continue",
+        "module": "envs.tasks.place_pair_of_shoes_interruption"
+      },
+      "place_dual_shoes_neutral": {
+        "class": "PlacePairOfShoesCopresence",
+        "instruction": "place both shoes in the shoebox while the human works nearby on the same table",
+        "module": "envs.tasks.place_pair_of_shoes_copresence"
+      },
+      "place_food_in_skillet_assist": {
+        "class": "PlaceFoodInSkilletContribution",
+        "instruction": "place the skillet on the stove and put the foods in it while the human helps place one food",
+        "module": "envs.tasks.place_food_in_skillet_contribution"
+      },
+      "place_food_in_skillet_interrupt": {
+        "class": "PlaceFoodInSkilletInterruption",
+        "instruction": "place the skillet on the stove and put the foods in it; the human may inspect one food item while you are reaching for it",
+        "module": "envs.tasks.place_food_in_skillet_interruption"
+      },
+      "place_food_in_skillet_neutral": {
+        "class": "PlaceFoodInSkilletCopresence",
+        "instruction": "place the food in the skillet while the human works nearby on the same table",
+        "module": "envs.tasks.place_food_in_skillet_copresence"
+      },
+      "put_object_cabinet_assist": {
+        "class": "PutObjectInCabinetContribution",
+        "instruction": "place the object inside the human-opened cabinet drawer",
+        "module": "envs.tasks.put_object_in_cabinet_contribution"
+      },
+      "put_object_cabinet_interrupt": {
+        "class": "PutObjectInCabinetInterruption",
+        "instruction": "place the object inside the cabinet drawer after the human inspects it",
+        "module": "envs.tasks.put_object_in_cabinet_interruption"
+      },
+      "put_object_cabinet_neutral": {
+        "class": "PutObjectInCabinetCopresence",
+        "instruction": "put the table object in the cabinet drawer while the human works nearby on the same table",
+        "module": "envs.tasks.put_object_in_cabinet_copresence"
+      },
+      "stack_bowls_three_assist": {
+        "class": "StackThreeBowlsContribution",
+        "instruction": "stack one bowl on the base bowl while the human stacks another bowl on the base",
+        "module": "envs.tasks.stack_three_bowls_contribution"
+      },
+      "stack_bowls_three_interrupt": {
+        "class": "StackThreeBowlsInterruption",
+        "instruction": "stack the three bowls on top of each other; if the human inspects one bowl midway through, wait and then continue",
+        "module": "envs.tasks.stack_three_bowls_interruption"
+      },
+      "stack_bowls_three_neutral": {
+        "class": "StackThreeBowlsCopresence",
+        "instruction": "stack the bowls while the human works nearby on the same table",
+        "module": "envs.tasks.stack_three_bowls_copresence"
+      },
+      "stamp_documents": {
+        "class": "FeedDocuments",
+        "instruction": "push each document into the stamp zone so the human can stamp it",
+        "module": "envs.tasks.feed_documents"
+      }
+    },
+    "alias_count": 32,
+    "descriptor_metadata": {
+      "blocks_ranking_rgb": {
+        "family": "blocks_ranking_rgb",
+        "registration": "canonical",
+        "variant": "base",
+        "variant_label": null
+      },
+      "blocks_ranking_rgb_assist": {
+        "family": "blocks_ranking_rgb",
+        "registration": "compatibility",
+        "variant": "contribution",
+        "variant_label": null
+      },
+      "blocks_ranking_rgb_interrupt": {
+        "family": "blocks_ranking_rgb",
+        "registration": "compatibility",
+        "variant": "interruption",
+        "variant_label": null
+      },
+      "blocks_ranking_rgb_neutral": {
+        "family": "blocks_ranking_rgb",
+        "registration": "compatibility",
+        "variant": "copresence",
+        "variant_label": null
+      },
+      "blocks_ranking_size": {
+        "family": "blocks_ranking_size",
+        "registration": "canonical",
+        "variant": "base",
+        "variant_label": null
+      },
+      "blocks_ranking_size_assist": {
+        "family": "blocks_ranking_size",
+        "registration": "compatibility",
+        "variant": "contribution",
+        "variant_label": null
+      },
+      "blocks_ranking_size_interrupt": {
+        "family": "blocks_ranking_size",
+        "registration": "compatibility",
+        "variant": "interruption",
+        "variant_label": null
+      },
+      "blocks_ranking_size_neutral": {
+        "family": "blocks_ranking_size",
+        "registration": "compatibility",
+        "variant": "copresence",
+        "variant_label": null
+      },
+      "categorize_cooperative": {
+        "family": "categorize",
+        "registration": "compatibility",
+        "variant": "contribution",
+        "variant_label": "cooperative"
+      },
+      "categorize_interrupt": {
+        "family": "categorize",
+        "registration": "compatibility",
+        "variant": "interruption",
+        "variant_label": null
+      },
+      "categorize_neutral": {
+        "family": "categorize",
+        "registration": "compatibility",
+        "variant": "copresence",
+        "variant_label": null
+      },
+      "categorize_objects_contribution": {
+        "family": "categorize",
+        "registration": "canonical",
+        "variant": "contribution",
+        "variant_label": "cooperative"
+      },
+      "categorize_objects_copresence": {
+        "family": "categorize",
+        "registration": "canonical",
+        "variant": "copresence",
+        "variant_label": null
+      },
+      "categorize_objects_interruption": {
+        "family": "categorize",
+        "registration": "canonical",
+        "variant": "interruption",
+        "variant_label": null
+      },
+      "deliver_to_human": {
+        "family": "deliver_to_human",
+        "registration": "canonical",
+        "variant": "cueing",
+        "variant_label": null
+      },
+      "deliver_to_human_easy": {
+        "family": "deliver_to_human",
+        "registration": "compatibility",
+        "variant": "cueing",
+        "variant_label": null
+      },
+      "dump_bin": {
+        "family": "dump_bin",
+        "registration": "canonical",
+        "variant": "base",
+        "variant_label": null
+      },
+      "dump_bin_assist": {
+        "family": "dump_bin",
+        "registration": "compatibility",
+        "variant": "contribution",
+        "variant_label": null
+      },
+      "dump_bin_contribution": {
+        "family": "dump_bin",
+        "registration": "canonical",
+        "variant": "contribution",
+        "variant_label": null
+      },
+      "dump_bin_copresence": {
+        "family": "dump_bin",
+        "registration": "canonical",
+        "variant": "copresence",
+        "variant_label": null
+      },
+      "dump_bin_interrupt": {
+        "family": "dump_bin",
+        "registration": "compatibility",
+        "variant": "interruption",
+        "variant_label": null
+      },
+      "dump_bin_interruption": {
+        "family": "dump_bin",
+        "registration": "canonical",
+        "variant": "interruption",
+        "variant_label": null
+      },
+      "dump_bin_neutral": {
+        "family": "dump_bin",
+        "registration": "compatibility",
+        "variant": "copresence",
+        "variant_label": null
+      },
+      "factory_inspect_pack": {
+        "family": "factory",
+        "registration": "canonical",
+        "variant": "cueing",
+        "variant_label": null
+      },
+      "factory_kit_packing": {
+        "family": "factory",
+        "registration": "canonical",
+        "variant": "contribution",
+        "variant_label": null
+      },
+      "factory_line_feeding": {
+        "family": "factory",
+        "registration": "canonical",
+        "variant": "cueing",
+        "variant_label": null
+      },
+      "feed_documents": {
+        "family": "stamp_documents",
+        "registration": "canonical",
+        "variant": "cueing",
+        "variant_label": null
+      },
+      "oil_bottle_recovery": {
+        "family": "oil_bottle_recovery",
+        "registration": "canonical",
+        "variant": "cueing",
+        "variant_label": null
+      },
+      "open_microwave": {
+        "family": "open_microwave",
+        "registration": "canonical",
+        "variant": "cueing",
+        "variant_label": null
+      },
+      "place_bread_in_basket": {
+        "family": "place_bread_in_basket",
+        "registration": "canonical",
+        "variant": "base",
+        "variant_label": null
+      },
+      "place_bread_in_basket_assist": {
+        "family": "place_bread_in_basket",
+        "registration": "compatibility",
+        "variant": "contribution",
+        "variant_label": null
+      },
+      "place_bread_in_basket_contribution": {
+        "family": "place_bread_in_basket",
+        "registration": "canonical",
+        "variant": "contribution",
+        "variant_label": null
+      },
+      "place_bread_in_basket_copresence": {
+        "family": "place_bread_in_basket",
+        "registration": "canonical",
+        "variant": "copresence",
+        "variant_label": null
+      },
+      "place_bread_in_basket_interrupt": {
+        "family": "place_bread_in_basket",
+        "registration": "compatibility",
+        "variant": "interruption",
+        "variant_label": null
+      },
+      "place_bread_in_basket_interruption": {
+        "family": "place_bread_in_basket",
+        "registration": "canonical",
+        "variant": "interruption",
+        "variant_label": null
+      },
+      "place_bread_in_basket_neutral": {
+        "family": "place_bread_in_basket",
+        "registration": "compatibility",
+        "variant": "copresence",
+        "variant_label": null
+      },
+      "place_burger_and_fries_contribution": {
+        "family": "place_burger_fries",
+        "registration": "canonical",
+        "variant": "contribution",
+        "variant_label": null
+      },
+      "place_burger_and_fries_copresence": {
+        "family": "place_burger_fries",
+        "registration": "canonical",
+        "variant": "copresence",
+        "variant_label": null
+      },
+      "place_burger_and_fries_interruption": {
+        "family": "place_burger_fries",
+        "registration": "canonical",
+        "variant": "interruption",
+        "variant_label": null
+      },
+      "place_burger_fries": {
+        "family": "place_burger_fries",
+        "registration": "canonical",
+        "variant": "base",
+        "variant_label": null
+      },
+      "place_burger_fries_assist": {
+        "family": "place_burger_fries",
+        "registration": "compatibility",
+        "variant": "contribution",
+        "variant_label": null
+      },
+      "place_burger_fries_interrupt": {
+        "family": "place_burger_fries",
+        "registration": "compatibility",
+        "variant": "interruption",
+        "variant_label": null
+      },
+      "place_burger_fries_neutral": {
+        "family": "place_burger_fries",
+        "registration": "compatibility",
+        "variant": "copresence",
+        "variant_label": null
+      },
+      "place_dual_shoes": {
+        "family": "place_dual_shoes",
+        "registration": "canonical",
+        "variant": "base",
+        "variant_label": null
+      },
+      "place_dual_shoes_assist": {
+        "family": "place_dual_shoes",
+        "registration": "compatibility",
+        "variant": "contribution",
+        "variant_label": null
+      },
+      "place_dual_shoes_interrupt": {
+        "family": "place_dual_shoes",
+        "registration": "compatibility",
+        "variant": "interruption",
+        "variant_label": null
+      },
+      "place_dual_shoes_neutral": {
+        "family": "place_dual_shoes",
+        "registration": "compatibility",
+        "variant": "copresence",
+        "variant_label": null
+      },
+      "place_food_in_skillet": {
+        "family": "place_food_in_skillet",
+        "registration": "canonical",
+        "variant": "base",
+        "variant_label": null
+      },
+      "place_food_in_skillet_assist": {
+        "family": "place_food_in_skillet",
+        "registration": "compatibility",
+        "variant": "contribution",
+        "variant_label": null
+      },
+      "place_food_in_skillet_contribution": {
+        "family": "place_food_in_skillet",
+        "registration": "canonical",
+        "variant": "contribution",
+        "variant_label": null
+      },
+      "place_food_in_skillet_copresence": {
+        "family": "place_food_in_skillet",
+        "registration": "canonical",
+        "variant": "copresence",
+        "variant_label": null
+      },
+      "place_food_in_skillet_interrupt": {
+        "family": "place_food_in_skillet",
+        "registration": "compatibility",
+        "variant": "interruption",
+        "variant_label": null
+      },
+      "place_food_in_skillet_interruption": {
+        "family": "place_food_in_skillet",
+        "registration": "canonical",
+        "variant": "interruption",
+        "variant_label": null
+      },
+      "place_food_in_skillet_neutral": {
+        "family": "place_food_in_skillet",
+        "registration": "compatibility",
+        "variant": "copresence",
+        "variant_label": null
+      },
+      "place_pair_of_shoes_contribution": {
+        "family": "place_dual_shoes",
+        "registration": "canonical",
+        "variant": "contribution",
+        "variant_label": null
+      },
+      "place_pair_of_shoes_copresence": {
+        "family": "place_dual_shoes",
+        "registration": "canonical",
+        "variant": "copresence",
+        "variant_label": null
+      },
+      "place_pair_of_shoes_interruption": {
+        "family": "place_dual_shoes",
+        "registration": "canonical",
+        "variant": "interruption",
+        "variant_label": null
+      },
+      "pour_water": {
+        "family": "pour_water",
+        "registration": "canonical",
+        "variant": "cueing",
+        "variant_label": null
+      },
+      "put_object_cabinet": {
+        "family": "put_object_cabinet",
+        "registration": "canonical",
+        "variant": "base",
+        "variant_label": null
+      },
+      "put_object_cabinet_assist": {
+        "family": "put_object_cabinet",
+        "registration": "compatibility",
+        "variant": "contribution",
+        "variant_label": null
+      },
+      "put_object_cabinet_interrupt": {
+        "family": "put_object_cabinet",
+        "registration": "compatibility",
+        "variant": "interruption",
+        "variant_label": null
+      },
+      "put_object_cabinet_neutral": {
+        "family": "put_object_cabinet",
+        "registration": "compatibility",
+        "variant": "copresence",
+        "variant_label": null
+      },
+      "put_object_in_cabinet_contribution": {
+        "family": "put_object_cabinet",
+        "registration": "canonical",
+        "variant": "contribution",
+        "variant_label": null
+      },
+      "put_object_in_cabinet_copresence": {
+        "family": "put_object_cabinet",
+        "registration": "canonical",
+        "variant": "copresence",
+        "variant_label": null
+      },
+      "put_object_in_cabinet_interruption": {
+        "family": "put_object_cabinet",
+        "registration": "canonical",
+        "variant": "interruption",
+        "variant_label": null
+      },
+      "rank_blocks_by_color_contribution": {
+        "family": "blocks_ranking_rgb",
+        "registration": "canonical",
+        "variant": "contribution",
+        "variant_label": null
+      },
+      "rank_blocks_by_color_copresence": {
+        "family": "blocks_ranking_rgb",
+        "registration": "canonical",
+        "variant": "copresence",
+        "variant_label": null
+      },
+      "rank_blocks_by_color_interruption": {
+        "family": "blocks_ranking_rgb",
+        "registration": "canonical",
+        "variant": "interruption",
+        "variant_label": null
+      },
+      "rank_blocks_by_size_contribution": {
+        "family": "blocks_ranking_size",
+        "registration": "canonical",
+        "variant": "contribution",
+        "variant_label": null
+      },
+      "rank_blocks_by_size_copresence": {
+        "family": "blocks_ranking_size",
+        "registration": "canonical",
+        "variant": "copresence",
+        "variant_label": null
+      },
+      "rank_blocks_by_size_interruption": {
+        "family": "blocks_ranking_size",
+        "registration": "canonical",
+        "variant": "interruption",
+        "variant_label": null
+      },
+      "stack_bowls_three": {
+        "family": "stack_bowls_three",
+        "registration": "canonical",
+        "variant": "base",
+        "variant_label": null
+      },
+      "stack_bowls_three_assist": {
+        "family": "stack_bowls_three",
+        "registration": "compatibility",
+        "variant": "contribution",
+        "variant_label": null
+      },
+      "stack_bowls_three_interrupt": {
+        "family": "stack_bowls_three",
+        "registration": "compatibility",
+        "variant": "interruption",
+        "variant_label": null
+      },
+      "stack_bowls_three_neutral": {
+        "family": "stack_bowls_three",
+        "registration": "compatibility",
+        "variant": "copresence",
+        "variant_label": null
+      },
+      "stack_three_bowls_contribution": {
+        "family": "stack_bowls_three",
+        "registration": "canonical",
+        "variant": "contribution",
+        "variant_label": null
+      },
+      "stack_three_bowls_copresence": {
+        "family": "stack_bowls_three",
+        "registration": "canonical",
+        "variant": "copresence",
+        "variant_label": null
+      },
+      "stack_three_bowls_interruption": {
+        "family": "stack_bowls_three",
+        "registration": "canonical",
+        "variant": "interruption",
+        "variant_label": null
+      },
+      "stamp_documents": {
+        "family": "stamp_documents",
+        "registration": "compatibility",
+        "variant": "cueing",
+        "variant_label": null
+      },
+      "take_from_human_easy": {
+        "family": "take_from_human",
+        "registration": "canonical",
+        "variant": "cueing",
+        "variant_label": null
+      },
+      "take_from_human_safety": {
+        "family": "take_from_human",
+        "registration": "canonical",
+        "variant": "cueing",
+        "variant_label": null
+      }
+    },
+    "canonical_order": [
+      "take_from_human_easy",
+      "deliver_to_human",
+      "take_from_human_safety",
+      "feed_documents",
+      "pour_water",
+      "oil_bottle_recovery",
+      "open_microwave",
+      "categorize_objects_contribution",
+      "categorize_objects_interruption",
+      "categorize_objects_copresence",
+      "put_object_cabinet",
+      "stack_bowls_three",
+      "place_bread_in_basket",
+      "dump_bin",
+      "place_burger_fries",
+      "place_dual_shoes",
+      "place_food_in_skillet",
+      "blocks_ranking_rgb",
+      "blocks_ranking_size",
+      "put_object_in_cabinet_contribution",
+      "put_object_in_cabinet_interruption",
+      "put_object_in_cabinet_copresence",
+      "stack_three_bowls_contribution",
+      "stack_three_bowls_interruption",
+      "stack_three_bowls_copresence",
+      "place_bread_in_basket_contribution",
+      "place_bread_in_basket_interruption",
+      "place_bread_in_basket_copresence",
+      "dump_bin_contribution",
+      "dump_bin_interruption",
+      "dump_bin_copresence",
+      "place_burger_and_fries_contribution",
+      "place_burger_and_fries_interruption",
+      "place_burger_and_fries_copresence",
+      "place_pair_of_shoes_contribution",
+      "place_pair_of_shoes_interruption",
+      "place_pair_of_shoes_copresence",
+      "place_food_in_skillet_contribution",
+      "place_food_in_skillet_interruption",
+      "place_food_in_skillet_copresence",
+      "rank_blocks_by_color_contribution",
+      "rank_blocks_by_color_interruption",
+      "rank_blocks_by_color_copresence",
+      "rank_blocks_by_size_contribution",
+      "rank_blocks_by_size_interruption",
+      "rank_blocks_by_size_copresence",
+      "factory_inspect_pack",
+      "factory_kit_packing",
+      "factory_line_feeding"
+    ],
+    "canonical": {
+      "blocks_ranking_rgb": {
+        "class": "BlocksRankingRGB",
+        "instruction": "place the red block, green block, and blue block in a row from left to right",
+        "module": "envs.task_bases.blocks_ranking_rgb"
+      },
+      "blocks_ranking_size": {
+        "class": "BlocksRankingSize",
+        "instruction": "place the largest, medium, and smallest blocks in a row from left to right",
+        "module": "envs.task_bases.blocks_ranking_size"
+      },
+      "categorize_objects_contribution": {
+        "class": "CategorizeObjectsContribution",
+        "instruction": "sort the objects into the matching baskets",
+        "module": "envs.tasks.categorize_objects_contribution"
+      },
+      "categorize_objects_copresence": {
+        "class": "CategorizeObjectsCopresence",
+        "instruction": "sort the objects into matching baskets while the human works nearby on the same table",
+        "module": "envs.tasks.categorize_objects_copresence"
+      },
+      "categorize_objects_interruption": {
+        "class": "CategorizeObjectsInterruption",
+        "instruction": "sort the objects into the matching baskets",
+        "module": "envs.tasks.categorize_objects_interruption"
+      },
+      "deliver_to_human": {
+        "class": "DeliverToHuman",
+        "instruction": "pick up the rubik's cube from the table and deliver it to the human",
+        "instruction_template": "pick up the {object} from the table and deliver it to the human",
+        "module": "envs.tasks.deliver_to_human"
+      },
+      "dump_bin": {
+        "class": "DumpBin",
+        "instruction": "place each object into the trash can beside the table",
+        "module": "envs.task_bases.dump_bin"
+      },
+      "dump_bin_contribution": {
+        "class": "DumpBinContribution",
+        "instruction": "empty the table cubes into the trash bin while the human tosses another cube into the bin",
+        "module": "envs.tasks.dump_bin_contribution"
+      },
+      "dump_bin_copresence": {
+        "class": "DumpBinCopresence",
+        "instruction": "put the table objects into the bin while the human works nearby on the same table",
+        "module": "envs.tasks.dump_bin_copresence"
+      },
+      "dump_bin_interruption": {
+        "class": "DumpBinInterruption",
+        "instruction": "place each cube into the trash can; the human will inspect one cube midway through - wait, then continue.",
+        "module": "envs.tasks.dump_bin_interruption"
+      },
+      "factory_inspect_pack": {
+        "class": "FactoryInspectPack",
+        "instruction": "pack each product into the shipping box after the human has inspected it",
+        "module": "envs.tasks.factory_inspect_pack"
+      },
+      "factory_kit_packing": {
+        "class": "FactoryKitPacking",
+        "instruction": "pack the remaining item into the shipping box while the human packs the other two",
+        "module": "envs.tasks.factory_kit_packing"
+      },
+      "factory_line_feeding": {
+        "class": "FactoryLineFeeding",
+        "instruction": "pick up each part and place it on the handover pad for the worker",
+        "module": "envs.tasks.factory_line_feeding"
+      },
+      "feed_documents": {
+        "class": "FeedDocuments",
+        "instruction": "push each document into the stamp zone so the human can stamp it",
+        "module": "envs.tasks.feed_documents"
+      },
+      "oil_bottle_recovery": {
+        "class": "OilBottleRecovery",
+        "instruction": "recover the knocked-over oil bottle from the cooking area and place it upright",
+        "module": "envs.tasks.oil_bottle_recovery"
+      },
+      "open_microwave": {
+        "class": "OpenMicrowave",
+        "instruction": "open the microwave door for the human carrying a plate",
+        "module": "envs.tasks.open_microwave"
+      },
+      "place_bread_in_basket": {
+        "class": "PlaceBreadInBasket",
+        "instruction": "put both pieces of bread into the basket",
+        "module": "envs.task_bases.place_bread_in_basket"
+      },
+      "place_bread_in_basket_contribution": {
+        "class": "PlaceBreadInBasketContribution",
+        "instruction": "put one bread into the basket while the human puts the other bread into the basket",
+        "module": "envs.tasks.place_bread_in_basket_contribution"
+      },
+      "place_bread_in_basket_copresence": {
+        "class": "PlaceBreadInBasketCopresence",
+        "instruction": "place both pieces of bread in the basket while the human works nearby on the same table",
+        "module": "envs.tasks.place_bread_in_basket_copresence"
+      },
+      "place_bread_in_basket_interruption": {
+        "class": "PlaceBreadInBasketInterruption",
+        "instruction": "put both breads into the basket; if the human inspects one bread midway through, wait and then continue",
+        "module": "envs.tasks.place_bread_in_basket_interruption"
+      },
+      "place_burger_and_fries_contribution": {
+        "class": "PlaceBurgerAndFriesContribution",
+        "instruction": "place the hamburger on the tray while the human adds one food item",
+        "module": "envs.tasks.place_burger_and_fries_contribution"
+      },
+      "place_burger_and_fries_copresence": {
+        "class": "PlaceBurgerAndFriesCopresence",
+        "instruction": "place the meal items on the tray while the human works nearby on the same table",
+        "module": "envs.tasks.place_burger_and_fries_copresence"
+      },
+      "place_burger_and_fries_interruption": {
+        "class": "PlaceBurgerAndFriesInterruption",
+        "instruction": "place the hamburger and the french fries on the tray; if the human inspects one item midway through, wait and then continue",
+        "module": "envs.tasks.place_burger_and_fries_interruption"
+      },
+      "place_burger_fries": {
+        "class": "PlaceBurgerFries",
+        "instruction": "place the hamburger and the french fries on the tray",
+        "module": "envs.task_bases.place_burger_fries"
+      },
+      "place_dual_shoes": {
+        "class": "PlaceDualShoes",
+        "instruction": "put the shoes in the shoebox",
+        "module": "envs.task_bases.place_dual_shoes"
+      },
+      "place_food_in_skillet": {
+        "class": "PlaceFoodInSkillet",
+        "instruction": "place the skillet on the stove and put the foods in it",
+        "module": "envs.task_bases.place_food_in_skillet"
+      },
+      "place_food_in_skillet_contribution": {
+        "class": "PlaceFoodInSkilletContribution",
+        "instruction": "place the skillet on the stove and put the foods in it while the human helps place one food",
+        "module": "envs.tasks.place_food_in_skillet_contribution"
+      },
+      "place_food_in_skillet_copresence": {
+        "class": "PlaceFoodInSkilletCopresence",
+        "instruction": "place the food in the skillet while the human works nearby on the same table",
+        "module": "envs.tasks.place_food_in_skillet_copresence"
+      },
+      "place_food_in_skillet_interruption": {
+        "class": "PlaceFoodInSkilletInterruption",
+        "instruction": "place the skillet on the stove and put the foods in it; the human may inspect one food item while you are reaching for it",
+        "module": "envs.tasks.place_food_in_skillet_interruption"
+      },
+      "place_pair_of_shoes_contribution": {
+        "class": "PlacePairOfShoesContribution",
+        "instruction": "the human will put one shoe in the shoebox; the robot puts the other shoe in the shoebox — work in parallel",
+        "module": "envs.tasks.place_pair_of_shoes_contribution"
+      },
+      "place_pair_of_shoes_copresence": {
+        "class": "PlacePairOfShoesCopresence",
+        "instruction": "place both shoes in the shoebox while the human works nearby on the same table",
+        "module": "envs.tasks.place_pair_of_shoes_copresence"
+      },
+      "place_pair_of_shoes_interruption": {
+        "class": "PlacePairOfShoesInterruption",
+        "instruction": "put the shoes in the shoebox; the human will inspect one shoe midway through - wait, then continue",
+        "module": "envs.tasks.place_pair_of_shoes_interruption"
+      },
+      "pour_water": {
+        "class": "PourWater",
+        "instruction": "pour water from the mug into the cup",
+        "module": "envs.tasks.pour_water"
+      },
+      "put_object_cabinet": {
+        "class": "PutObjectCabinet",
+        "instruction": "place the object inside the open cabinet drawer",
+        "module": "envs.task_bases.put_object_cabinet"
+      },
+      "put_object_in_cabinet_contribution": {
+        "class": "PutObjectInCabinetContribution",
+        "instruction": "place the object inside the human-opened cabinet drawer",
+        "module": "envs.tasks.put_object_in_cabinet_contribution"
+      },
+      "put_object_in_cabinet_copresence": {
+        "class": "PutObjectInCabinetCopresence",
+        "instruction": "put the table object in the cabinet drawer while the human works nearby on the same table",
+        "module": "envs.tasks.put_object_in_cabinet_copresence"
+      },
+      "put_object_in_cabinet_interruption": {
+        "class": "PutObjectInCabinetInterruption",
+        "instruction": "place the object inside the cabinet drawer after the human inspects it",
+        "module": "envs.tasks.put_object_in_cabinet_interruption"
+      },
+      "rank_blocks_by_color_contribution": {
+        "class": "RankBlocksByColorContribution",
+        "instruction": "place the red, green, and blue blocks in left-to-right order while the human helps place one block",
+        "module": "envs.tasks.rank_blocks_by_color_contribution"
+      },
+      "rank_blocks_by_color_copresence": {
+        "class": "RankBlocksByColorCopresence",
+        "instruction": "place the red, green, and blue blocks in left-to-right order while the human works nearby on the same table",
+        "module": "envs.tasks.rank_blocks_by_color_copresence"
+      },
+      "rank_blocks_by_color_interruption": {
+        "class": "RankBlocksByColorInterruption",
+        "instruction": "place the red, green, and blue blocks in left-to-right order; wait while the human inspects one block, then continue",
+        "module": "envs.tasks.rank_blocks_by_color_interruption"
+      },
+      "rank_blocks_by_size_contribution": {
+        "class": "RankBlocksBySizeContribution",
+        "instruction": "place the RGB blocks in largest-to-smallest order while the human helps place one block",
+        "module": "envs.tasks.rank_blocks_by_size_contribution"
+      },
+      "rank_blocks_by_size_copresence": {
+        "class": "RankBlocksBySizeCopresence",
+        "instruction": "place the blocks from largest to smallest while the human works nearby on the same table",
+        "module": "envs.tasks.rank_blocks_by_size_copresence"
+      },
+      "rank_blocks_by_size_interruption": {
+        "class": "RankBlocksBySizeInterruption",
+        "instruction": "place the RGB blocks in largest-to-smallest order; wait while the human inspects one block, then continue",
+        "module": "envs.tasks.rank_blocks_by_size_interruption"
+      },
+      "stack_bowls_three": {
+        "class": "StackBowlsThree",
+        "instruction": "stack the three bowls on top of each other",
+        "module": "envs.task_bases.stack_bowls_three"
+      },
+      "stack_three_bowls_contribution": {
+        "class": "StackThreeBowlsContribution",
+        "instruction": "stack one bowl on the base bowl while the human stacks another bowl on the base",
+        "module": "envs.tasks.stack_three_bowls_contribution"
+      },
+      "stack_three_bowls_copresence": {
+        "class": "StackThreeBowlsCopresence",
+        "instruction": "stack the bowls while the human works nearby on the same table",
+        "module": "envs.tasks.stack_three_bowls_copresence"
+      },
+      "stack_three_bowls_interruption": {
+        "class": "StackThreeBowlsInterruption",
+        "instruction": "stack the three bowls on top of each other; if the human inspects one bowl midway through, wait and then continue",
+        "module": "envs.tasks.stack_three_bowls_interruption"
+      },
+      "take_from_human_easy": {
+        "class": "TakeFromHumanEasy",
+        "instruction": "take the rubik's cube from the person and place it on the table",
+        "instruction_template": "take the {object} from the person and place it on the table",
+        "module": "envs.tasks.take_from_human_easy"
+      },
+      "take_from_human_safety": {
+        "class": "TakeFromHumanSafety",
+        "instruction": "The human is chopping vegetables and offering the kitchen knife to you. Take the knife by its handle and place it in the knife box on your side of the counter.",
+        "module": "envs.tasks.take_from_human_safety"
+      }
+    },
+    "canonical_count": 49
+  },
+  "no_human": {
+    "canonical": {
+      "blocks_ranking_rgb": {
+        "class": "BlocksRankingRGB",
+        "module": "envs.task_bases.blocks_ranking_rgb"
+      },
+      "blocks_ranking_size": {
+        "class": "BlocksRankingSize",
+        "module": "envs.task_bases.blocks_ranking_size"
+      },
+      "categorize": {
+        "class": "CategorizeObjectsContribution",
+        "module": "envs.tasks.categorize_objects_contribution"
+      },
+      "dump_bin": {
+        "class": "DumpBin",
+        "module": "envs.task_bases.dump_bin"
+      },
+      "place_bread_in_basket": {
+        "class": "PlaceBreadInBasket",
+        "module": "envs.task_bases.place_bread_in_basket"
+      },
+      "place_burger_fries": {
+        "class": "PlaceBurgerFries",
+        "module": "envs.task_bases.place_burger_fries"
+      },
+      "place_dual_shoes": {
+        "class": "PlaceDualShoes",
+        "module": "envs.task_bases.place_dual_shoes"
+      },
+      "place_food_in_skillet": {
+        "class": "PlaceFoodInSkillet",
+        "module": "envs.task_bases.place_food_in_skillet"
+      },
+      "put_object_cabinet": {
+        "class": "PutObjectCabinet",
+        "module": "envs.task_bases.put_object_cabinet"
+      },
+      "stack_bowls_three": {
+        "class": "StackBowlsThree",
+        "module": "envs.task_bases.stack_bowls_three"
+      }
+    },
+    "variant_aliases": {
+      "blocks_ranking_rgb_assist": "blocks_ranking_rgb",
+      "blocks_ranking_rgb_interrupt": "blocks_ranking_rgb",
+      "blocks_ranking_rgb_neutral": "blocks_ranking_rgb",
+      "blocks_ranking_size_assist": "blocks_ranking_size",
+      "blocks_ranking_size_interrupt": "blocks_ranking_size",
+      "blocks_ranking_size_neutral": "blocks_ranking_size",
+      "categorize_cooperative": "categorize",
+      "categorize_interrupt": "categorize",
+      "categorize_neutral": "categorize",
+      "categorize_objects_contribution": "categorize",
+      "categorize_objects_copresence": "categorize",
+      "categorize_objects_interruption": "categorize",
+      "dump_bin_assist": "dump_bin",
+      "dump_bin_contribution": "dump_bin",
+      "dump_bin_copresence": "dump_bin",
+      "dump_bin_interrupt": "dump_bin",
+      "dump_bin_interruption": "dump_bin",
+      "dump_bin_neutral": "dump_bin",
+      "place_bread_in_basket_assist": "place_bread_in_basket",
+      "place_bread_in_basket_contribution": "place_bread_in_basket",
+      "place_bread_in_basket_copresence": "place_bread_in_basket",
+      "place_bread_in_basket_interrupt": "place_bread_in_basket",
+      "place_bread_in_basket_interruption": "place_bread_in_basket",
+      "place_bread_in_basket_neutral": "place_bread_in_basket",
+      "place_burger_and_fries_contribution": "place_burger_fries",
+      "place_burger_and_fries_copresence": "place_burger_fries",
+      "place_burger_and_fries_interruption": "place_burger_fries",
+      "place_burger_fries_assist": "place_burger_fries",
+      "place_burger_fries_interrupt": "place_burger_fries",
+      "place_burger_fries_neutral": "place_burger_fries",
+      "place_dual_shoes_assist": "place_dual_shoes",
+      "place_dual_shoes_interrupt": "place_dual_shoes",
+      "place_dual_shoes_neutral": "place_dual_shoes",
+      "place_food_in_skillet_assist": "place_food_in_skillet",
+      "place_food_in_skillet_contribution": "place_food_in_skillet",
+      "place_food_in_skillet_copresence": "place_food_in_skillet",
+      "place_food_in_skillet_interrupt": "place_food_in_skillet",
+      "place_food_in_skillet_interruption": "place_food_in_skillet",
+      "place_food_in_skillet_neutral": "place_food_in_skillet",
+      "place_pair_of_shoes_contribution": "place_dual_shoes",
+      "place_pair_of_shoes_copresence": "place_dual_shoes",
+      "place_pair_of_shoes_interruption": "place_dual_shoes",
+      "put_object_cabinet_assist": "put_object_cabinet",
+      "put_object_cabinet_interrupt": "put_object_cabinet",
+      "put_object_cabinet_neutral": "put_object_cabinet",
+      "put_object_in_cabinet_contribution": "put_object_cabinet",
+      "put_object_in_cabinet_copresence": "put_object_cabinet",
+      "put_object_in_cabinet_interruption": "put_object_cabinet",
+      "rank_blocks_by_color_contribution": "blocks_ranking_rgb",
+      "rank_blocks_by_color_copresence": "blocks_ranking_rgb",
+      "rank_blocks_by_color_interruption": "blocks_ranking_rgb",
+      "rank_blocks_by_size_contribution": "blocks_ranking_size",
+      "rank_blocks_by_size_copresence": "blocks_ranking_size",
+      "rank_blocks_by_size_interruption": "blocks_ranking_size",
+      "stack_bowls_three_assist": "stack_bowls_three",
+      "stack_bowls_three_interrupt": "stack_bowls_three",
+      "stack_bowls_three_neutral": "stack_bowls_three",
+      "stack_three_bowls_contribution": "stack_bowls_three",
+      "stack_three_bowls_copresence": "stack_bowls_three",
+      "stack_three_bowls_interruption": "stack_bowls_three"
+    }
+  },
+  "schemas": {
+    "block_ranking_assist_state": {
+      "required_keys": [
+        "schema_version",
+        "avatar_key",
+        "robot_keys",
+        "avatar_start_delay_steps",
+        "eval_assist_trigger_step",
+        "eval_assist_fired",
+        "eval_assist_failed",
+        "policy_step_count"
+      ],
+      "source": "envs/interaction/block_ranking.py",
+      "source_class": "BlockRankingAssistController",
+      "version": "genesis_hr_bench.block_ranking_assist_state.v1"
+    },
+    "block_ranking_interrupt_state": {
+      "required_keys": [
+        "schema_version",
+        "sampling",
+        "interrupted_key",
+        "scripted_prefix_count",
+        "eval_palm_default",
+        "eval_legacy_trigger_draw",
+        "eval_interrupt_fired",
+        "eval_target_key",
+        "eval_interrupt_started",
+        "released_interrupted_pos",
+        "policy_step_count",
+        "interrupt_trigger",
+        "interrupt_human"
+      ],
+      "source": "envs/interaction/block_ranking.py",
+      "source_class": "BlockRankingInterruptController",
+      "version": "genesis_hr_bench.block_ranking_interrupt_state.v2"
+    },
+    "eval_set": {
+      "jsonl_required_keys": [
+        "schema_version",
+        "eval_set",
+        "id",
+        "category",
+        "task",
+        "seed",
+        "renderer",
+        "setting",
+        "action_type",
+        "action_substeps",
+        "max_steps",
+        "config_overrides"
+      ],
+      "source": "scripts/generate_eval_set.py",
+      "version": "genesis_hr_bench.eval_set.v1"
+    },
+    "interaction_state": {
+      "required_keys": [
+        "schema_version"
+      ],
+      "source": "envs/interaction/base.py",
+      "source_class": "InteractionController",
+      "version": "genesis_hr_bench.interaction_state.v1"
+    },
+    "legacy_trajectory_pickle": {
+      "optional_keys": [
+        "avatar_collision_log",
+        "avatar_safety_intervention_log"
+      ],
+      "required_keys": [
+        "observations",
+        "left_joint_path",
+        "right_joint_path",
+        "instruction",
+        "evaluation"
+      ],
+      "source": "envs/base_task.py"
+    },
+    "policy_directive": {
+      "required_keys": [
+        "schema_version",
+        "disposition",
+        "reason",
+        "hold_steps",
+        "metadata"
+      ],
+      "source": "envs/interaction/base.py",
+      "source_class": "PolicyDirective",
+      "version": "genesis_hr_bench.policy_directive.v1"
+    },
+    "rlds": {
+      "builder_class": "GenesisHrBench",
+      "dataset_name": "genesis_hr_bench",
+      "episode_metadata_keys": [
+        "file_path",
+        "task_name",
+        "seed"
+      ],
+      "observation_keys": [
+        "image",
+        "wrist_image",
+        "state"
+      ],
+      "source": "scripts/build_genesis_hr_bench_rlds.py",
+      "step_keys": [
+        "observation",
+        "action",
+        "discount",
+        "reward",
+        "is_first",
+        "is_last",
+        "is_terminal",
+        "language_instruction"
+      ],
+      "version": "1.0.0"
+    },
+    "scene_init": {
+      "required_keys": [
+        "schema_version",
+        "captured_at_utc",
+        "table",
+        "entities",
+        "task_attrs"
+      ],
+      "set_required_keys": [
+        "schema_version",
+        "scene_init_schema_version",
+        "generated_at_utc",
+        "source_manifest",
+        "episodes"
+      ],
+      "set_version": "genesis_hr_bench.scene_init_set.v1",
+      "source": "envs/scene_init.py",
+      "version": "genesis_hr_bench.scene_init.v1"
+    },
+    "vla_steps": {
+      "action_label_keys": [
+        "qpos_target_action",
+        "qpos_delta_action",
+        "ee_delta_action",
+        "gripper_target_action",
+        "gripper_action"
+      ],
+      "h5_attributes": [
+        "n_arm",
+        "capture_stride",
+        "cams",
+        "schema_version",
+        "action_label_keys"
+      ],
+      "h5_groups": [
+        "images",
+        "depth"
+      ],
+      "required_h5_datasets": [
+        "t",
+        "qpos",
+        "qpos_target",
+        "qpos_target_valid",
+        "ee",
+        "gripper_meas",
+        "gripper_target",
+        "qpos_delta_action",
+        "qpos_target_action",
+        "qpos_target_action_valid",
+        "ee_delta_action",
+        "gripper_action",
+        "gripper_target_action"
+      ],
+      "source": "envs/vla_recorder.py",
+      "version": "vla_steps_v2_qpos_target"
+    }
+  },
+  "script_cli": {
+    "scripts/collect.py": {
+      "arguments": {
+        "--episodes": {
+          "default": 50
+        },
+        "--no-human": {
+          "action": "store_true"
+        },
+        "--renderer": {
+          "choices": [
+            "nyx",
+            "rasterizer"
+          ]
+        },
+        "--setting": {
+          "choices": [
+            "sim",
+            "real"
+          ]
+        },
+        "--start-seed": {
+          "default": 0
+        },
+        "--table-random-objects": {
+          "aliases": [
+            "--task-irrelevant-objects",
+            "--with-irrelevant-objects"
+          ]
+        },
+        "--task": {
+          "required": true
+        }
+      },
+      "parse_mode": "parse_args"
+    },
+    "scripts/eval.py": {
+      "arguments": {
+        "--episodes": {
+          "default": 10
+        },
+        "--max-steps": {
+          "default": 300
+        },
+        "--no-human": {
+          "action": "store_true"
+        },
+        "--output-json": {},
+        "--policy": {
+          "choices": [
+            "random",
+            "expert_full_state",
+            "expert",
+            "expert_no_human"
+          ],
+          "default": "random"
+        },
+        "--renderer": {
+          "choices": [
+            "nyx",
+            "rasterizer"
+          ]
+        },
+        "--scene-init-file": {},
+        "--task": {
+          "required": true
+        }
+      },
+      "parse_mode": "parse_args"
+    },
+    "scripts/eval_vla.py": {
+      "arguments": {
+        "--action-type": {
+          "choices": [
+            "qpos",
+            "qpos_abs",
+            "ee"
+          ],
+          "default": "qpos"
+        },
+        "--checkpoint": {},
+        "--episodes": {
+          "default": 10
+        },
+        "--max-steps": {
+          "default": 300
+        },
+        "--model": {
+          "required": true
+        },
+        "--no-human": {
+          "action": "store_true"
+        },
+        "--no-vla-train-defaults": {
+          "action": "store_true"
+        },
+        "--output-json": {},
+        "--scene-init-file": {},
+        "--server-url": {},
+        "--static-avatar": {
+          "action": "store_true"
+        },
+        "--task": {
+          "required": true
+        }
+      },
+      "parse_mode": "parse_args"
+    },
+    "scripts/probe_latest_genesis_robot_tasks.py": {
+      "arguments": {
+        "--all-registered": {
+          "action": "store_true"
+        },
+        "--num-shards": {
+          "default": 1
+        },
+        "--settle-steps": {},
+        "--shard-index": {
+          "default": 0
+        },
+        "--tasks": {},
+        "--timeout": {
+          "default": 300.0
+        }
+      },
+      "parse_mode": "parse_args"
+    }
+  },
+  "task_api": {
+    "base_class": "envs.base_task.BaseTask",
+    "optional_expert_hook": "play_blind_once",
+    "required_methods": [
+      "__init__",
+      "reset",
+      "load_actors",
+      "play_once",
+      "check_success",
+      "evaluate",
+      "get_obs",
+      "take_action",
+      "save_trajectory"
+    ]
+  }
+}

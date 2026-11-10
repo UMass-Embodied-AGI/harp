@@ -1,0 +1,7 @@
+-r requirements.txt
+
+# Release-contract and simulator smoke tests.
+pytest==9.0.2
+
+# Matches the correctness-only gate configured in ruff.toml.
+ruff==0.4.10

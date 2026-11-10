@@ -1,0 +1,110 @@
+# Per-host wrapper-script config (see scripts/env.local.sh.example).
+scripts/env.local.sh
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Assets (managed via rclone+OneDrive). Root-anchored so package-owned
+# directories such as envs/robot/assets remain trackable.
+/assets
+# Curated self-contained copy assembled for the HuggingFace dataset release.
+/assets_release
+
+# Debug
+*.bak
+*_backup
+/debug/
+/debug_*
+/config/debug_*.yml
+# Local experiment launchers remain opt-in. Keep the release launcher
+# already tracked by Git while preventing broad `git add` from sweeping in
+# workstation/job-specific submissions.
+/scripts/launch/*
+!/scripts/launch/rasterizer.sh
+
+# Data
+/data
+/saved_videos
+/output
+/logs
+tasks.txt
+/vla_data*
+/.vla_data*
+/vla_cpu_*
+# Current local data-selection experiments are not release commands yet.
+/scripts/vla_data/materialize_hf_ready.py
+/scripts/vla_data/select_successful_subset.py
+/scripts/vla_data/select_successful_subset.sbatch
+*.mp4
+
+# Job logs — committed as empty dir only.
+job_logs/*
+!job_logs/.gitkeep
+
+# IDE
+.vscode/
+.idea/
+.claude/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env
+.env
+.key
+*.out
+*.log
+
+# Vendored repos / large local data
+/third_party
+
+# VLA checkpoints (downloaded separately, 15+ GB)
+/checkpoints
+
+# The LeRobot baseline source is a git submodule (see .gitmodules). The model
+# server lives in baseline/servers/ and IS tracked.
+
+# Local artifacts / scratch
+/.tmp/
+/videos
+/test_*.png
+/test_*.mp4
+
+# Run/eval artifacts
+/runs
+
+# Test-run media artifacts
+tests/outputs/
+tests/test_stretch_output/
+
+# Latest-Genesis env + caches (see requirements-genesis-latest.txt)
+.venv*/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+__nyx_cache__/
+assets/objects/**/_nyx_merged_*.obj
+assets/objects/**/_nyx_textured_*.glb
+assets/objects/**/*_nyx_s*.urdf
+assets/objects/**/visual/*_nyx_single.obj
+
+# Generated render artifacts
+/outputs
+
+# Diagnostic / sweep scratch (underscore-prefixed one-offs)
+scripts/_*.py
+scripts/_*.sh
+scripts/_*.sbatch
+
+# Eval sets: only the released frozen sets are tracked; anything else under
+# eval_sets/ is run-local scratch (generate_eval_set.py output, per-seed
+# debug sets, A/B probes).
+/eval_sets/*
+!/eval_sets/eval_v0_smoke/
+!/eval_sets/eval_v3_sampled/
